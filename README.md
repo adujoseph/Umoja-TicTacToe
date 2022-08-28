@@ -1,4 +1,4 @@
-# REACH + REACT BOILERPLATE :technologist:
+# REACH + REACT [UMOJA TiCTaCToE]:technologist:
 
 ### :question:	What is [Reach](https://docs.reach.sh/tut/overview/#overview)?
 
@@ -9,11 +9,11 @@
 
 [React](https://reactjs.org/docs/create-a-new-react-app.html) is [one of many](https://docs.reach.sh/frontend/#p_1) frameworks that can be implemented with [Reach](https://docs.reach.sh/tut/overview/#overview).
 
-:seedling: This boilerplate helps kickstart your development of a Reach dAPP using React frontend.
+<!-- :seedling: This boilerplate helps kickstart your development of a Reach dAPP using React frontend. -->
 
 ---
 
-### USING [BOILERPLATE](https://github.com/paradoxfly/reach-react-boilerplate)
+### USING [UMOJA TIC TAC TOE DEMO](https://github.com/adujoseph/Umoja-TicTacToe)
 
 #### File Directory
 ```
@@ -60,7 +60,7 @@
 
 #### Clone the repository
 
-`git clone https://github.com/paradoxfly/reach-react-boilerplate`
+`git clone https://github.com/adujoseph/Umoja-TicTacToe`
 
 #### Install the dependencies
 
@@ -93,4 +93,4 @@ This opens a new browser with `localhost:3000` running.
 
 Open `localhost:3000` on separate browsers to test using [MyAlgo](https://wallet.myalgo.com/) Testnet or it's Mnemonic keys.
 
-Implement your backend changes in `src/reach/index.rsh`
+<!-- Implement your backend changes in `src/reach/index.rsh` -->
