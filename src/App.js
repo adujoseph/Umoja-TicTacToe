@@ -7,8 +7,8 @@ import { views, Loader } from './utils/';
 import './App.css';
 
 const reach = loadStdlib('ALGO');
-reach.setWalletFallback(reach.walletFallback({ providerEnv: 'TestNet', MyAlgoConnect }));
-const fmt = (x) => reach.formatCurrency(x, 4);
+// reach.setWalletFallback(reach.walletFallback({ providerEnv: 'TestNet', MyAlgoConnect }));
+// const fmt = (x) => reach.formatCurrency(x, 4);
 
 function App() {
   const [account, setAccount] = useState({})
@@ -84,9 +84,11 @@ function App() {
   const connectWallet = async () => {
     try {
       var acc = await reach.getDefaultAccount();
+      const balAtomic = await reach.balanceOf(acc);
+      const bal = reach.formatCurrency(balAtomic, 4);
       // const balAtomic = await reach.balanceOf(acc);
       // const bal = reach.formatCurrency(balAtomic, 4);
-      console.log(acc, 'something')
+      console.log(acc, bal,  'something')
       return acc 
     } catch (error) {
       console.log(error)
