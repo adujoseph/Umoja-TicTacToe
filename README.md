@@ -1,4 +1,4 @@
-# REACH + REACT [UMOJA TiCTaCToE]:technologist:
+# REACH + REACT [UMOJA TiCTaCToE](https://github.com/adujoseph/Umoja-TicTacToe) :technologist:
 
 ### :question:	What is [Reach](https://docs.reach.sh/tut/overview/#overview)?
 

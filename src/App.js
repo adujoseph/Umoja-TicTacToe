@@ -22,6 +22,11 @@ function App() {
   const [firstPlayer, setFirstPlayer] = useState('');
   const [secondPlayer, setSecondPlayer] = useState('');
   const [wager, setWager] = useState('');
+  const [firstAcc, setFirstAcc] = useState();
+  const [secondAcc, setSecondAcc] = useState();
+  const [firstBal, setFirstBal] = useState();
+  const [secondBal, setSecondBal] = useState();
+
 
 
   // const reachFunctions = {
@@ -81,36 +86,52 @@ function App() {
   // Frontend Logic For Game ****************** //
 
   /** get wallet details */
-  const connectWallet = async () => {
+  const connectWallet = async (arg) => {
     try {
       var acc = await reach.getDefaultAccount();
       const balAtomic = await reach.balanceOf(acc);
       const bal = reach.formatCurrency(balAtomic, 4);
-      // const balAtomic = await reach.balanceOf(acc);
-      // const bal = reach.formatCurrency(balAtomic, 4);
-      console.log(acc, bal,  'something')
-      return acc 
+      if (arg === '1') {
+        setFirstAcc(acc);
+        setFirstBal(bal)
+      } else {
+        setSecondAcc(acc);
+        setSecondBal(bal)
+      }
+
     } catch (error) {
       console.log(error)
     }
   }
 
-    /** deploy the contract as player one */
-  // const deployContract = async () => {
-  //   const contract = account.contract(backend);
-  //     backend.Deployer(contract, Deployer);
-  //     setView(views.DEPLOYING);
-  //     const ctcInfo = JSON.stringify(await contract.getInfo(), null, 2)
-  //     setContractInfo(ctcInfo);
-  //     setView(views.WAIT_FOR_ATTACHER)
-  // }
+  //Participant Objects
+  const Common = {
+    random: () => reach.hasRandom.random(),
 
-    /** dattach to contract as player two */
-  // const attachContract = async () => {
-  //   const contract = account.contract(backend, JSON.parse(contractInfo));
-  //   backend.Attacher(contract, Attacher)
-  //   setView(views.ATTACHING)
-  // }
+    test: () => setView(views.TEST_VIEW)
+  }
+
+  const Deployer = {
+    ...Common
+  }
+
+  const Attacher = {
+    ...Common
+  }
+
+  /** deploy the contract as player one */
+  const deployContract = async () => {
+    const contract = firstAcc.contract(backend);
+    backend.Deployer(contract, Deployer);
+    const ctcInfo = JSON.stringify(await contract.getInfo(), null, 2)
+    setContractInfo(ctcInfo);
+  }
+
+  /** dattach to contract as player two */
+  const attachContract = async () => {
+    const contract = account.contract(backend, JSON.parse(contractInfo));
+    backend.Attacher(contract, Attacher)
+  }
   const checkDraw = () => {
     const checkfill = cells.filter(f => f != null);
 
@@ -119,9 +140,13 @@ function App() {
     }
   }
 
-  const handleSubmit = async (arg) => {
-    const result = await connectWallet();
-    console.log(result)
+  const handleSubmit = (arg) => {
+    const result = connectWallet(arg);
+    // console.log(result)
+    if (!result) {
+      alert('Error connecting wallet');
+      return
+    }
     if (arg === '1') {
       if (firstPlayer === '') {
         alert('Enter name')
@@ -131,21 +156,15 @@ function App() {
         alert('Enter wager')
         return
       }
-
+      deployContract()
       handlePlayer("1")
-   
-    
-     
     }
     if (arg === '2') {
       if (secondPlayer === '') {
         alert('Enter name')
         return
       }
-      const bal= connectWallet()
-      if(bal){
-        //continue;
-      }
+      attachContract ()
       handlePlayer("2")
     }
 
